@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG ID Editor</title>
+</head>
+
+<style>
+    body {
+        background-color: black;
+        color: white;
+        display: grid;
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+
+    #svg-preview {
+        min-height: 20vh;
+    }
+
+    #panel {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+</style>
+
+<body>
+    <h1>SVG ID Editor</h1>
+    <div id="panel">
+        <form id = "uploadSVG" action = "/uploadSVG" method = "post" enctype="multipart/form-data">
+            <input type = "file" name="svgFile" accept=".svg" onchange = "document.getElementById('uploadSVG').submit()" />
+        </form>
+        <form id = "uploadText" action = "/uploadText" method = "post" enctype="multipart/form-data">
+            <input type = "file" name="idFile" accept=".txt" onchange = "document.getElementById('uploadText').submit()" />
+        </form>
+        <form action = "/idSVG" method = "post"><input type="submit" /></form><br/>
+        <form action = "/highlight" method = "post">
+            <input type = "text" name = "idInput" />
+            <input type = "color" name = "color" />
+            <input type = "submit" />
+        </form>
+    </div><br />
+    {{ preview|safe }}
+</body>
+</html>
