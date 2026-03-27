@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Response
 import xml.etree.ElementTree as ET
+
+ET.register_namespace("", "http://www.w3.org/2000/svg")
 
 class Editor():
     def __init__(self):
@@ -49,6 +51,16 @@ class Editor():
                     element.set("fill", color)
         root = self.format(root)
         self.imageCode = ET.tostring(root, encoding="unicode")
+    
+    def export(self):
+        with open('output.svg', 'w', encoding='utf-8') as file:
+            file.write(self.imageExport)
+        root = ET.fromstring(self.imageExport)
+        if "xmlns" not in root.attrib:
+            root.set("xmlns", "http://www.w3.org/2000/svg")
+        root = self.format(root)
+        self.imageExport = ET.tostring(root, encoding="unicode")
+        return self.imageExport
 
 editor = Editor()
 
@@ -59,7 +71,6 @@ def home():
         code = f"<div id='svg-preview'>{editor.getImage()}</div>"
     else:
         code = "<div id-'svg-preview></div>"
-    print(editor.getImage())
     return render_template('index.html', preview = code)
 
 @app.route('/uploadSVG', methods = ['POST'])
@@ -87,6 +98,15 @@ def highlight():
     colorInput = request.form['color']
     editor.highlight(idInput, colorInput)
     return redirect(url_for('home'))
+
+@app.route('/export', methods = ['POST'])
+def export():
+    svg = editor.export()
+    return Response(
+        svg,
+        mimetype="image/svg+xml",
+        headers={"Content-Disposition": "attachment;filename=output.svg"}
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)
