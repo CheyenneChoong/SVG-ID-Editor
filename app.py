@@ -7,6 +7,7 @@ class Editor():
     def __init__(self):
         self.imageCode = ""
         self.imageExport = ""
+        self.idList = []
     
     def setImage(self, image):
         self.imageCode = image
@@ -31,6 +32,8 @@ class Editor():
         return root
 
     def idSVG(self):
+        if not self.idList:
+            return
         root = ET.fromstring(self.imageCode)
         for element in root.iter():
             if "fill" in element.attrib:
@@ -53,8 +56,8 @@ class Editor():
         self.imageCode = ET.tostring(root, encoding="unicode")
     
     def export(self):
-        with open('output.svg', 'w', encoding='utf-8') as file:
-            file.write(self.imageExport)
+        if not self.imageExport:
+            return
         root = ET.fromstring(self.imageExport)
         if "xmlns" not in root.attrib:
             root.set("xmlns", "http://www.w3.org/2000/svg")
