@@ -11,18 +11,20 @@
     <link rel="stylesheet" href="/static/css/overlay.css" />
 </head>
 
+<script src="/static/js/file.js"></script>
+
 <body>
     <div id="left">
         <div id="file-management">
             <h1>SVG ID Editor</h1>
             <div id="file-icons">
                 <button onclick="document.getElementById('new-project').style.display='flex';"><img src="/static/assets/new.png" alt="New Project" /></button>
-                <button onclick="document.getElementById('open-project').style.display='flex';"><img src="/static/assets/open.png" alt="Open Project" /></button>
+                <button onclick="projects();"><img src="/static/assets/open.png" alt="Open Project" /></button>
                 <button><img src="/static/assets/about.png" alt="About" /></button>
             </div>
         </div>
 
-        <div id="project">
+        <div id="project" style="display: none;">
             <h2 id="project-title">Project Name</h2>
             <input id="file-upload" type="file" accept=".svg" style="display:none;" />
             <button onclick="document.getElementById('file-upload').click();">Upload SVG</button>
@@ -31,25 +33,25 @@
         </div>
     </div>
 
-    <div id="center">
+    <div id="center" style="display: none;">
         <div id="zoom">
             <button>+</button>
             <button>-</button>
         </div>
     </div>
 
-    <div id="right">
+    <div id="right" style="display: none;">
         <div id="option">
             <div id="option-row-1">
-                <button disabled>Automatic</button>
+                <button>Automatic</button>
                 <input id="manual-upload" type="file" accept=".txt" style="display: none;" />
-                <button onclick="document.getElementById('manual-upload').click();" disabled>Upload</button>
-                <button disabled>Reset</button>
+                <button onclick="document.getElementById('manual-upload').click();">Upload</button>
+                <button>Reset</button>
             </div>
             <div id="option-row-2">
-                <button disabled>Test</button>
-                <button disabled>Download</button>
-                <button disabled>Document</button>
+                <button>Test</button>
+                <button>Download</button>
+                <button>Document</button>
             </div>
         </div>
 
@@ -62,4 +64,5 @@
     {% include 'new.html' %}
     {% include 'open.html' %}
 </body>
+
 </html>

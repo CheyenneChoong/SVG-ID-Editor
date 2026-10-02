@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, jsonify
 from fileManagement.file import FileManagement
 
 fileBlueprint = Blueprint('file', __name__)
@@ -15,15 +15,11 @@ def newProject():
 
 @fileBlueprint.route('/projectList')
 def projectList():
-    print("Project List")
-    return
+    project = fileManagement.getProjects()
+    return jsonify({"project": project})
 
-@fileBlueprint.route('/open')
-def openProject():
-    print("Open")
-    return
-
-@fileBlueprint.route('/delete')
+@fileBlueprint.route('/delete', methods=['GET'])
 def deleteProject():
-    print("Delete")
-    return
+    projectId = request.args.get('projectId')
+    fileManagement.delete(str(projectId))
+    return jsonify({})
