@@ -44,9 +44,13 @@
     padding: 10px;
 }
 
-#left #project h2 {
+#left #project #project-title {
     font-size: 18px;
+    font-weight: bold;
     margin: 0;
+    outline: none;
+    background-color: transparent;
+    border: none;
 }
 
 #left #project button {
@@ -70,7 +74,23 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     overflow-y: scroll;
     scrollbar-width: thin;
+}
+
+#left #project-files .file-row {
+    padding: 0px 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+#left #project-files .file-row input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    flex: 1;
+}
+
+#left #project-files .file-row button {
+    background-color: transparent;
 }

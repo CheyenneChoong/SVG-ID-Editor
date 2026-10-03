@@ -29,8 +29,12 @@ class FileManagement:
             json.dump(self.data, file, indent=4)
 
         os.mkdir(f'projects/{__projectId}')
+        __defaultData = {
+            "active": "None",
+            "files": {}
+        }
         with open(f'projects/{__projectId}/project.json', 'w') as file:
-            pass
+            json.dump(__defaultData, file, indent=4)
 
         self.updateAccess(__projectId)
 
@@ -53,3 +57,5 @@ class FileManagement:
         with open('data/file.json', 'w') as file:
             json.dump(self.data, file, indent=4)
         shutil.rmtree(f'projects/{projectId}')
+
+fileManagement = FileManagement()

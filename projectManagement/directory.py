@@ -1,18 +1,27 @@
 from flask import Blueprint, request, redirect, url_for, jsonify
-from fileManagement.file import FileManagement
+from fileManagement.file import fileManagement
 from projectManagement.project import Project
 
-fileBlueprint = Blueprint('file', __name__)
-fileManagement = FileManagement()
+projectBlueprint = Blueprint('project', __name__)
 projectManagement = ""
 projectId = ""
 
-@fileBlueprint.route('/new', methods=['GET'])
+@projectBlueprint.route('/open', methods=['GET'])
 def openProject():
     global projectId, projectManagement
     projectId = request.args.get("projectId")
+    fileManagement.updateAccess(projectId)
     projectManagement = Project(projectId)
     title = fileManagement.getProjects()[projectId]['title']
+    data = projectManagement.getFile()
     return jsonify({
-        'title': title
+        'title': title,
+        'active': data['active'],
+        'files': data['files']
     })
+
+@projectBlueprint.route('/upload-file', methods=['POST'])
+def uploadFile():
+    upload = request.files['upload-svg']
+    data = projectManagement.uploadFile(upload)
+    return jsonify({"fileId": data[0], "name": data[1]})

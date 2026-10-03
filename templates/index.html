@@ -12,6 +12,7 @@
 </head>
 
 <script src="/static/js/file.js"></script>
+<script src="/static/js/project.js"></script>
 
 <body>
     <div id="left">
@@ -25,8 +26,8 @@
         </div>
 
         <div id="project" style="display: none;">
-            <h2 id="project-title">Project Name</h2>
-            <input id="file-upload" type="file" accept=".svg" style="display:none;" />
+            <input type="text" id="project-title" value="Project Name" />
+            <input onchange="uploadFile();" id="file-upload" name="upload-svg" type="file" accept=".svg" style="display:none;" />
             <button onclick="document.getElementById('file-upload').click();">Upload SVG</button>
             <div id="project-files">
             </div> 
@@ -43,10 +44,10 @@
     <div id="right" style="display: none;">
         <div id="option">
             <div id="option-row-1">
-                <button>Automatic</button>
+                <button id="automatic-button">Automatic</button>
                 <input id="manual-upload" type="file" accept=".txt" style="display: none;" />
-                <button onclick="document.getElementById('manual-upload').click();">Upload</button>
-                <button>Reset</button>
+                <button onclick="document.getElementById('manual-upload').click();" id="manual-button">Upload</button>
+                <button id="reset-button">Reset</button>
             </div>
             <div id="option-row-2">
                 <button>Test</button>
