@@ -26,3 +26,10 @@ def deleteProject():
     projectId = request.args.get('projectId')
     fileManagement.delete(str(projectId))
     return jsonify({})
+
+@fileBlueprint.route('/renameProject', methods=['GET'])
+def renameProject():
+    projectId = request.args.get('projectId')
+    title = request.args.get('title')
+    fileManagement.update(projectId, 'title', title)
+    return jsonify({})

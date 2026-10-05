@@ -52,7 +52,8 @@ class Project:
         os.remove(f'projects/{self.projectId}/original-{fileId}.svg')
         os.remove(f'projects/{self.projectId}/work-{fileId}.svg')
         del(self.data['file'][fileId])
-        self.data['active'] = "None"
+        if self.data['active'] == fileId:
+            self.data['active'] = "None"
         with open(f'projects/{self.projectId}/project.json', 'w') as file:
             json.dump(self.data, file, indent=4)
 

@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, Response
+from flask import Flask, render_template
 from fileManagement.directory import fileBlueprint
 from projectManagement.directory import projectBlueprint
-import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
 @app.route('/')

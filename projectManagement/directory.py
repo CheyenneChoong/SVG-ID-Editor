@@ -20,8 +20,14 @@ def openProject():
         'files': data['files']
     })
 
-@projectBlueprint.route('/upload-file', methods=['POST'])
+@projectBlueprint.route('/uploadFile', methods=['POST'])
 def uploadFile():
     upload = request.files['upload-svg']
     data = projectManagement.uploadFile(upload)
     return jsonify({"fileId": data[0], "name": data[1]})
+
+@projectBlueprint.route('/deleteFile', methods=['GET'])
+def deleteFile():
+    fileId = request.args.get("fileId")
+    projectManagement.deleteFile(fileId)
+    return jsonify({})

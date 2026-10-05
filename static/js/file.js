@@ -29,3 +29,11 @@ async function deleteProject(projectId) {
     await fetch('/delete?projectId=' + projectId);
     projects();
 }
+
+async function renameProject(projectId) {
+    title = document.getElementById("project-title").value;
+    if (title.trim() == "") {
+        return;
+    }
+    await fetch(`/renameProject?projectId=${projectId}&title=${title}`);
+}
