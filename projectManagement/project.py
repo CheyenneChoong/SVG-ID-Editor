@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 from datetime import datetime
 
 class Project:
@@ -27,7 +28,7 @@ class Project:
         __originalPath = f'projects/{self.projectId}/original-{__fileId}.svg'
         __workPath = f'projects/{self.projectId}/work-{__fileId}.svg'
         file.save(__originalPath)
-        file.save(__workPath)
+        shutil.copy(__originalPath, __workPath)
         __name = file.filename
         __name = __name.replace(".svg", "")
 
@@ -42,16 +43,11 @@ class Project:
         with open(f'projects/{self.projectId}/project.json', 'w') as file:
             json.dump(self.data, file, indent=4)
         return [__fileId, __name]
-
-    def renameFile(self, fileId, name):
-        self.data['files'][fileId]['name'] = name
-        with open(f'projects/{self.projectId}/project.json', 'w') as file:
-            json.dump(self.data, file, indent=4)
     
     def deleteFile(self, fileId):
         os.remove(f'projects/{self.projectId}/original-{fileId}.svg')
         os.remove(f'projects/{self.projectId}/work-{fileId}.svg')
-        del(self.data['file'][fileId])
+        del(self.data['files'][fileId])
         if self.data['active'] == fileId:
             self.data['active'] = "None"
         with open(f'projects/{self.projectId}/project.json', 'w') as file:

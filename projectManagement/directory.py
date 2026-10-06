@@ -1,6 +1,7 @@
-from flask import Blueprint, request, redirect, url_for, jsonify
+from flask import Blueprint, request, jsonify
 from fileManagement.file import fileManagement
 from projectManagement.project import Project
+from svgEdit.svg import svg
 
 projectBlueprint = Blueprint('project', __name__)
 projectManagement = ""
@@ -30,4 +31,22 @@ def uploadFile():
 def deleteFile():
     fileId = request.args.get("fileId")
     projectManagement.deleteFile(fileId)
+    return jsonify({})
+
+@projectBlueprint.route('/getSvg')
+def getSvg():
+    data = projectManagement.getFile()
+    if data['active'] != "None":
+        svg.file(projectId, data['active'])
+        svgTag = svg.getSvg()
+        fileData = data['files'][data['active']]
+    else:
+        svgTag = ""
+        fileData = {}
+    return jsonify({"active": data['active'], "svg": svgTag, "data": fileData})
+
+@projectBlueprint.route('/selectFile', methods=['GET'])
+def selectFile():
+    fileId = request.args.get("fileId")
+    projectManagement.activeFile(fileId)
     return jsonify({})

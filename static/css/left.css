@@ -82,6 +82,7 @@
     padding: 0px 5px;
     display: flex;
     flex-direction: row;
+    cursor: pointer;
 }
 
 #left #project-files .file-row input {
@@ -89,6 +90,7 @@
     border: none;
     outline: none;
     flex: 1;
+    cursor: pointer;
 }
 
 #left #project-files .file-row button {
