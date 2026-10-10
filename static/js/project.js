@@ -39,16 +39,23 @@ async function openFile() {
     }
 
     fileList = data.data;
-    if (fileList["id-mode"] == "Manual") {
+    if (fileList["id-mode"] == "manual") {
         document.getElementById("automatic-button").disabled = true;
-        document.getElementById("manual-button").disabled = false;
-        document.getElementById("manual-button").style.backgroundColor = "#131898";
-    } else if(fileList["id-mode"] == "Automatic") {
         document.getElementById("manual-button").disabled = true;
-        document.getElementById("automatic-button").disabled = false;
+        document.getElementById("manual-button").style.backgroundColor = "#131898";
+    } else if(fileList["id-mode"] == "automatic") {
+        document.getElementById("manual-button").disabled = true;
+        document.getElementById("automatic-button").disabled = true;
         document.getElementById("automatic-button").style.backgroundColor = "#131898";
+    } else {
+        document.getElementById("manual-button").disabled = false;
+        document.getElementById("manual-button").style.backgroundColor = "#6F74F7";
+        document.getElementById("automatic-button").disabled = false;
+        document.getElementById("automatic-button").style.backgroundColor = "#6F74F7";
     }
 
+    document.getElementById("preview").style.width = (data.size["width"] * data.data["zoom"]) + "px";
+    document.getElementById("preview").style.height = (data.size["height"] * data.data["zoom"]) + "px";
     document.getElementById("preview").innerHTML = data.svg;
     document.getElementById("center").style.display = "block";
     document.getElementById("right").style.display = "flex";
@@ -91,7 +98,9 @@ async function selectFile(fileId) {
     openProject(document.getElementById("project-id").innerText);
 }
 
-async function renameFile(fileId) {
-    await fetch(`/renameFile?fileId=${fileId}`);
-    document.getElementById(`name-${fileId}`).readOnly = true;
+async function zoom(type) {
+    response = await fetch(`/zoom?zoom=${type}`);
+    data = await response.json();
+    document.getElementById("preview").style.width = (data.size["width"] * data.zoom) + "px";
+    document.getElementById("preview").style.height = (data.size["height"] * data.zoom) + "px";
 }

@@ -37,8 +37,7 @@ class Project:
             "name": __name,
             "id-mode": "None",
             "test": "False",
-            "zoom-width": 0,
-            "zoom-height": 0 
+            "zoom": 1,
         }
         with open(f'projects/{self.projectId}/project.json', 'w') as file:
             json.dump(self.data, file, indent=4)
