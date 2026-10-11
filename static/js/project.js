@@ -43,20 +43,46 @@ async function openFile() {
         document.getElementById("automatic-button").disabled = true;
         document.getElementById("manual-button").disabled = true;
         document.getElementById("manual-button").style.backgroundColor = "#131898";
+        document.getElementById("automatic-button").style.backgroundColor = "#6F74F7";
     } else if(fileList["id-mode"] == "automatic") {
         document.getElementById("manual-button").disabled = true;
         document.getElementById("automatic-button").disabled = true;
         document.getElementById("automatic-button").style.backgroundColor = "#131898";
+        document.getElementById("manual-button").style.backgroundColor = "#6F74F7";
     } else {
         document.getElementById("manual-button").disabled = false;
         document.getElementById("manual-button").style.backgroundColor = "#6F74F7";
         document.getElementById("automatic-button").disabled = false;
         document.getElementById("automatic-button").style.backgroundColor = "#6F74F7";
     }
+    
+    idList();
+
+    if (fileList["test"] == "True") {
+        testResponse = await fetch('/test');
+        testSvg = await testResponse.json();
+        svg = testSvg.svg;
+        document.getElementById("test-button").style.backgroundColor = "#131898";
+        
+        idCards = document.getElementsByClassName("id-card");
+        for (const idCard of idCards) {
+            idCard.addEventListener("mouseenter", () => {
+                card = document.getElementById(`test-${idCard.id.replace("card-", "")}`);
+                card.setAttribute("fill", document.getElementById(`fill-${idCard.id.replace("card-", "")}`).value);
+                card.setAttribute("stroke", document.getElementById(`stroke-${idCard.id.replace("card-", "")}`).value);
+            });
+            idCard.addEventListener("mouseleave", () => {
+                document.getElementById("preview").innerHTML = svg;
+            });
+        }
+    } else {
+        svg = data.svg;
+        document.getElementById("test-button").style.backgroundColor = "#6F74F7";
+    }
 
     document.getElementById("preview").style.width = (data.size["width"] * data.data["zoom"]) + "px";
     document.getElementById("preview").style.height = (data.size["height"] * data.data["zoom"]) + "px";
-    document.getElementById("preview").innerHTML = data.svg;
+    document.getElementById("preview").innerHTML = svg;
     document.getElementById("center").style.display = "block";
     document.getElementById("right").style.display = "flex";
 }

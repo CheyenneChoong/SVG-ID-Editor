@@ -78,3 +78,13 @@ def updateMode():
     data = projectManagement.getFile()
     projectManagement.updateMode(data['active'], key, value)
     return jsonify({})
+
+@projectBlueprint.route("/updateTest")
+def updateTest():
+    data = projectManagement.getFile()
+    active = data['files'][data['active']]
+    if active['test'] == "True":
+        projectManagement.updateMode(data['active'], 'test', 'False')
+    else:
+        projectManagement.updateMode(data['active'], 'test', 'True')
+    return jsonify({})

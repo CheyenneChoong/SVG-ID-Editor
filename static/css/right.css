@@ -43,3 +43,42 @@
     overflow-y: scroll;
     scrollbar-width: thin;
 }
+
+.id-card {
+    padding: 10px;
+    background-color: #D3F8FF;
+}
+
+.id-card:hover {
+    background-color: #5DE7FF;
+    transition: background-color 0.3s ease;
+}
+
+.id-card label {
+    font-size: 15px;
+    padding-right: 10px;
+}
+
+.id-card .colour-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.id-card input[type=text] {
+    width: flex;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-size: 15px;
+}
+
+.id-card .id-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    gap: 10px;
+}
+
+.id-card .id-button button {
+    padding: 0;
+}

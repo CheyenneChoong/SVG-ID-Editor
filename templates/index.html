@@ -49,14 +49,13 @@
         <div id="option">
             <div id="option-row-1">
                 <button id="automatic-button" onclick="automaticId();">Automatic</button>
-                <input id="manual-upload" type="file" accept=".txt" style="display: none;" />
+                <input id="manual-upload" onchange="manualId();" type="file" accept=".txt" style="display: none;" />
                 <button onclick="document.getElementById('manual-upload').click();" id="manual-button">Upload</button>
                 <button id="reset-button" onclick="reset();">Reset</button>
             </div>
             <div id="option-row-2">
-                <button>Test</button>
+                <button id="test-button" onclick="testMode();">Test</button>
                 <button onclick="download();">Download</button>
-                <button>Document</button>
             </div>
         </div>
 
