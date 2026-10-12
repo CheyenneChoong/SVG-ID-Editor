@@ -4,8 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help</title>
+    <link href="/static/css/about.css" rel="stylesheet" />
 </head>
+
 <body>
+    <h1>SVG ID Editor</h1>
+    <h2>Version 2.0.0</h2>
+
     
+    <img src="/static/assets/image.png" style="width: 50%;"/>
+
+    <div id="content">
+        <h3>1. File Management</h3>
+        <ul>
+            <li>New Project</li>
+            <li>Open Existing Project</li>
+            <li>About</li>
+        </ul>
+
+        <h3>2. Project Management</h3>
+        <ul>
+            <li>Rename project</li>
+            <li>Upload SVG files to work with within the project.</li>
+            <li>Delete files within the project</li>
+        </ul>
+
+        <h3>3. SVG Preview</h3>
+        <ul>
+            <li>Preview the SVG</li>
+            <li>Zoom in or zoom out the selected SVG</li>
+        </ul>
+
+        <h3>4. SVG Processing</h3>
+        <ul>
+            <li>Automatic ID : One click and every element of the svg will be ID.</li>
+            <li>Upload ID : Upload a .txt file containing the ID and conditions for identification of element.<br/>
+                Format = Reference Colour,Attribute,ID,Final Colour (e.g. #FF0000,stroke,base,#000000)
+            </li>
+            <li>Reset : Resets the SVG back to the original no ID version.</li>
+            <li>Test : Test mode allows for preview of the selected ID part. Hover over the ID card in the ID list.</li>
+            <li>Download : Download the SVG.</li>
+        </ul>
+    </div>
 </body>
 </html>

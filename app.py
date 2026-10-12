@@ -8,6 +8,10 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 app.register_blueprint(fileBlueprint)
 app.register_blueprint(projectBlueprint)
 app.register_blueprint(svgBlueprint)

@@ -81,7 +81,7 @@ class Svg:
         testSvg = ET.parse(f"projects/{self.projectId}/work-{self.fileId}.svg")
         root = testSvg.getroot()
         for element in root.iter():
-            if element.get("stroke") is not None and element.get("id") is not None:
+            if element.get("stroke") != "none" and element.get("id") is not None:
                 element.set("stroke", "#989898")
                 element.set("fill", "none")
                 element.set("id", f"test-{element.attrib['id']}")
