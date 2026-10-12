@@ -9,19 +9,19 @@ Version 2.0.0 aims to provide a proper UI for the tool as well as introduce a ne
 ![SVG ID Editor](SVG-ID-Editor.png)
 
 ## Features
-1. File Management
+### 1. File Management
 - Create new project
 - Open existing project
 
-2. Project Management
+### 2. Project Management
 - Upload SVG file to work with in the project
 - Rename project
 
-3. SVG Preview
+### 3. SVG Preview
 - Preview the SVG
 - Zoom in / zoom out the select SVG
 
-4. SVG Processing
+### 4. SVG Processing
 - Automatic ID
 - Upload ID > core component from Version 1.0.0
 - Reset
